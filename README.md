@@ -52,8 +52,11 @@ This application is a simple Flutter-based app with three main screens and a sub
 ---
 
  
+## ✨ Acknowledgments
 
- 
+- This project provided a great opportunity to learn new technologies and enhance my Flutter development skills.
+
+--- 
  
 
  
