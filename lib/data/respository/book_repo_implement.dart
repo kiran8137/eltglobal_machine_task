@@ -11,7 +11,7 @@ class BookRepoImplement extends BookRepository{
   Future<List<BookModel?>> fetchBooks(int page)async {
      try{
       var url = 
-"https://assessment.eltglobal.in/api/books/date-range?from=1980-01-10&to=2024-10-10";
+"https://assessment.eltglobal.in/api/books?page=1&limit=10";
       final uri = Uri.parse(url);
 
        final response = await http.get(uri);
@@ -47,6 +47,35 @@ class BookRepoImplement extends BookRepository{
       log(".....${error.toString()}");
       throw Exception();
      }
+  }
+  
+  @override
+  Future<BookModel> fetchBookDetails(String id) async {
+    try{
+      var url = "https://assessment.eltglobal.in/api/books/$id";
+      
+      final response = await http.get(Uri.parse(url));
+
+      if(response.statusCode == 200){
+        final decodedData = jsonDecode(response.body);
+        final jsonData = decodedData['result'];
+        
+        final result = BookModel.fromJson(jsonData);
+         var authorResponse = await http.get(Uri.parse("https://assessment.eltglobal.in/api/authors/${result.authorId}"));
+         if(authorResponse.statusCode == 200){
+           final jsonName = jsonDecode(authorResponse.body);
+        final authorName = jsonName["result"]["name"];
+        return result.copyWith(authorName);
+         }
+        debugPrint(result.toString());
+        return result;
+      }else{
+        throw Exception();
+      }
+    }catch(error){
+      log(error.toString());
+      throw Exception();
+    }
   }
 
     

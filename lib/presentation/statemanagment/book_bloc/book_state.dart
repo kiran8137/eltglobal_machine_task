@@ -20,3 +20,18 @@ final class FetchBookSuccessState extends BookState{
 }
 
 final class FetchBookEmptyState extends BookState{}
+
+
+final class FetchBookDetailIntial extends BookState{}
+
+final class FetchBookDetailSuccess extends BookState{
+  final BookModel book;
+
+ const FetchBookDetailSuccess({required this.book});
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [book];
+}
+
+final class FetchBookDetailEmpty extends BookState{}

@@ -14,6 +14,17 @@ class FetchBooksEvent extends BookEvent{
  const FetchBooksEvent({required this.page , required this.limit});
 
  @override
-  // TODO: implement props
+  
   List<Object> get props => [page , limit];
+}
+
+class FetchBookDetailEvent extends BookEvent{
+  final String bookId;
+
+  const FetchBookDetailEvent({required this.bookId});
+
+@override
+   
+  List<Object> get props => [bookId];
+  
 }

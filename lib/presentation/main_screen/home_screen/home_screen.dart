@@ -6,6 +6,7 @@ import 'package:elt_global_machine_task/presentation/widgets_component/app_bar.d
 import 'package:elt_global_machine_task/presentation/widgets_component/book_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
  
 
 class HomeScreen extends StatefulWidget {
@@ -73,6 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     }
                     else if(state is FetchBookSuccessState){
                       return GridView.builder(
+                      
                         controller: scrollController,
                         itemCount: state.books.length ,
                         gridDelegate:
@@ -83,13 +85,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                 childAspectRatio: 0.6),
                         itemBuilder: (context, index) {
                           final book = state.books[index];
-                          return   BookWidget(book: book!);
+                          return   GestureDetector(
+                            onTap: (){
+                              BlocProvider.of<BookBloc>(context).add(FetchBookDetailEvent(bookId: book.id));
+                              context.go('/bookdetailscreen');
+                            },
+                            child: BookWidget(book: book!));
                         });
                     }else if(state is FetchBookEmptyState){
                       return Center( child: Text("Can't able to load'"));
                     }
                     else{
-                      return Text('Some thing went wrong');
+                      return Center(child: CircularProgressIndicator(),);
                     }
                     
                   },
