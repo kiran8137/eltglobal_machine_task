@@ -4,8 +4,6 @@ import 'package:elt_global_machine_task/data/respository/auth_repo_implement.dar
 import 'package:elt_global_machine_task/data/respository/author_repo_implement.dart';
 import 'package:elt_global_machine_task/data/respository/book_repo_implement.dart';
 import 'package:elt_global_machine_task/data/respository/user_repo_implement.dart';
-import 'package:elt_global_machine_task/domain/respository/auth_repo.dart';
-import 'package:elt_global_machine_task/domain/respository/user_repo.dart';
 import 'package:elt_global_machine_task/presentation/statemanagment/auth_bloc/auth_bloc.dart';
 
 import 'package:elt_global_machine_task/core/themes/light_theme.dart';

@@ -8,11 +8,11 @@ Padding textFormField({required String labelText , required String hintText ,req
   ValueNotifier<bool> obscureValue = ValueNotifier<bool>(true); // to toggle the visibility icon
     return Padding(
       
-            padding:  EdgeInsets.symmetric(horizontal:18),
+            padding:  const EdgeInsets.symmetric(horizontal:18),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(labelText,style: TextStyle(fontSize: 12 , color: Color.fromARGB(255, 123, 123, 123)),),
+                Text(labelText,style: const TextStyle(fontSize: 12 , color: Color.fromARGB(255, 123, 123, 123)),),
                 const SizedBox(height: 5),
                 SizedBox(
                 width: constraints.maxWidth < 600 ? 300 : constraints.maxHeight < 600 ? 300 : 500,

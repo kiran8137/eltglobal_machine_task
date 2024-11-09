@@ -7,7 +7,6 @@ import 'package:elt_global_machine_task/presentation/book_detail_screen/widgets/
 import 'package:elt_global_machine_task/presentation/statemanagment/book_bloc/book_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -44,11 +43,11 @@ class BookDetailScreen extends StatelessWidget {
                 showModalBottomSheet(
                     context: context,
                     builder: (context) {
-                      return RatingBottomSheet(
+                      return ratingBottomSheet(
                           rating, context, bookId); //extracted as method
                     });
               },
-              child: AddRatingButton(), //button for showing bottom sheet
+              child: const AddRatingButton(), //button for showing bottom sheet
             )
           ],
         ),
@@ -57,7 +56,7 @@ class BookDetailScreen extends StatelessWidget {
       body: SafeArea(
           child: BlocConsumer<BookBloc, BookState>(
         listener: (context, state) {
-          // TODO: implement listener
+          
         },
         builder: (context, state) {
           if (state is FetchBookDetailIntial) {

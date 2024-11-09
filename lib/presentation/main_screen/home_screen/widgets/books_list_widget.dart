@@ -44,10 +44,10 @@ class BooksListWidget extends StatelessWidget {
                     child: BookWidget(book: book!));
                 });
             }else if(state is FetchBookEmptyState){
-              return Center( child: Text("Can't able to load'"));
+              return const Center( child: Text("Can't able to load'"));
             }
             else{
-              return Center(child: CircularProgressIndicator(),);
+              return const Center(child: CircularProgressIndicator(),);
             }
             
           },

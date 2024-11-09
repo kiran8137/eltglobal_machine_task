@@ -35,7 +35,7 @@ class AddRatingsEvent extends BookEvent{
   const AddRatingsEvent({required this.ratings ,required this.bookId});
 
   @override
-  // TODO: implement props
+   
   List<Object> get props => [ratings , bookId];
   
 }

@@ -1,5 +1,4 @@
 import 'package:elt_global_machine_task/domain/entity/book_entity.dart';
-import 'package:flutter/material.dart';
 
 class BookModel extends BookEntity {
   const BookModel(

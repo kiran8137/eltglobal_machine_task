@@ -12,20 +12,20 @@ AppBar commonAppBar(BuildContext context , [String? title]) {
               context: context, 
               builder: (context){
                 return AlertDialog(
-                  title: Text("Are you sure want to logour"),
+                  title: const Text("Are you sure want to logour"),
                   actions: [
                    TextButton(
                     onPressed: (){
                       Navigator.pop(context);
                     },
-                     child: Text('cancel')
+                     child: const Text('cancel')
                      ),
                      TextButton(
                     onPressed: (){
                       context.go('/loginscreen');
                       
                     },
-                     child: Text('cancel')
+                     child: const Text('cancel')
                      )
                   ],
                 );
@@ -33,7 +33,7 @@ AppBar commonAppBar(BuildContext context , [String? title]) {
               );
             context.go('/loginscreen');
           }, 
-          icon: Icon(Icons.logout)
+          icon: const Icon(Icons.logout)
           )
       ],
       backgroundColor: Theme.of(context).colorScheme.surface,

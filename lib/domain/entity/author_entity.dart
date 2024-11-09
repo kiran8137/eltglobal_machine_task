@@ -12,6 +12,6 @@ class AuthorEntity extends Equatable{
   const AuthorEntity({required this.id, required this.name, required this.birthDate, required this.biography});
   
   @override
-  // TODO: implement props
+  
   List<Object?> get props => [id , name , birthDate , biography];
   }

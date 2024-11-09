@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 ThemeData lightMode = ThemeData(
-  colorScheme: ColorScheme.light(
+  colorScheme: const ColorScheme.light(
     surface: Colors.white,
     primary: Color(0xFFF56C04)
     // secondary: Colors.grey.shade200,
@@ -11,7 +11,7 @@ ThemeData lightMode = ThemeData(
     // inversePrimary: Colors.grey.shade300
 
   ),
-   bottomNavigationBarTheme: BottomNavigationBarThemeData(
+   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     selectedItemColor: Color(0xFFF56C04), // Matches the primary color
     unselectedItemColor: Colors.grey,     // Color for unselected items
     selectedIconTheme: IconThemeData(color: Color(0xFFF56C04)),

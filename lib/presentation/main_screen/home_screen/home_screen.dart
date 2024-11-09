@@ -1,14 +1,11 @@
  
-import 'dart:ui';
 
 import 'package:elt_global_machine_task/presentation/main_screen/home_screen/widgets/books_list_widget.dart';
 import 'package:elt_global_machine_task/presentation/main_screen/home_screen/widgets/search_text_form.dart';
 import 'package:elt_global_machine_task/presentation/statemanagment/book_bloc/book_bloc.dart';
 import 'package:elt_global_machine_task/presentation/common_widgets_component/app_bar.dart';
-import 'package:elt_global_machine_task/presentation/common_widgets_component/book_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
  
 
 class HomeScreen extends StatefulWidget {
@@ -25,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     
-    BlocProvider.of<BookBloc>(context).add(FetchBooksEvent(page: 1, limit: 10));
+    BlocProvider.of<BookBloc>(context).add(const FetchBooksEvent(page: 1, limit: 10));
     super.initState();
   }
 

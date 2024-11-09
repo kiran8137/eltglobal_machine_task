@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:elt_global_machine_task/data/respository/auth_repo_implement.dart';
 import 'package:elt_global_machine_task/domain/respository/auth_repo.dart';
 import 'package:meta/meta.dart';
 

@@ -12,7 +12,7 @@ final class FetchBookInitial extends BookState {}
 final class FetchBookSuccessState extends BookState{
  final List<BookModel?> books;
 
-  FetchBookSuccessState({required this.books});
+  const FetchBookSuccessState({required this.books});
 
   @override
    
@@ -30,7 +30,7 @@ final class FetchBookDetailSuccess extends BookState{
  const FetchBookDetailSuccess({required this.book});
 
   @override
-  // TODO: implement props
+   
   List<Object> get props => [book];
 }
 

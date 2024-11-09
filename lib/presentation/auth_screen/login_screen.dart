@@ -1,7 +1,6 @@
 
 
-import 'package:elt_global_machine_task/data/respository/auth_repo_implement.dart';
-import 'package:elt_global_machine_task/presentation/auth_screen/login_screen.dart';
+ 
 import 'package:elt_global_machine_task/presentation/statemanagment/auth_bloc/auth_bloc.dart';
 import 'package:elt_global_machine_task/presentation/common_widgets_component/text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +35,7 @@ class _LoginScreen extends State<LoginScreen> {
         child: BlocListener<AuthBloc, AuthState>(
           listener: (context, state) {
             if(state is AuthInitial){
-              Center(child: CircularProgressIndicator());
+              const Center(child: CircularProgressIndicator());
             }
             if(state is AuthSuccessState){
               context.go('/homescreen');

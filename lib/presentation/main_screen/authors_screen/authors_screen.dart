@@ -1,13 +1,10 @@
 import 'dart:math';
 
-import 'package:elt_global_machine_task/data/model/author_model.dart';
 import 'package:elt_global_machine_task/presentation/main_screen/authors_screen/widgets/authors_widget.dart';
-import 'package:elt_global_machine_task/presentation/statemanagment/auth_bloc/auth_bloc.dart';
 import 'package:elt_global_machine_task/presentation/statemanagment/author_bloc/author_bloc.dart';
 import 'package:elt_global_machine_task/presentation/common_widgets_component/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AuthorsScreen extends StatefulWidget {
   AuthorsScreen({super.key});
