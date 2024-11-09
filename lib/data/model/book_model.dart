@@ -25,7 +25,7 @@ class BookModel extends BookEntity {
         authorName: json[''].toString(),
         coverPictureURL: json['coverPictureURL'].toString(), 
         price: json['price'].toString(), 
-        ratings: json['ratings'] ?? "", 
+        ratings: List<dynamic>.from(json['ratings']), 
         starCount: json['starCount'].toString()
         )
         ;

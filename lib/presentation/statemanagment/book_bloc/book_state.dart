@@ -35,3 +35,7 @@ final class FetchBookDetailSuccess extends BookState{
 }
 
 final class FetchBookDetailEmpty extends BookState{}
+
+final class AddRatingsSuccess extends BookState{}
+
+final class AddRatingsError extends BookState{}

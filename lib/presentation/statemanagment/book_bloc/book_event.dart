@@ -28,3 +28,14 @@ class FetchBookDetailEvent extends BookEvent{
   List<Object> get props => [bookId];
   
 }
+
+class AddRatingsEvent extends BookEvent{
+  final double ratings;
+  final String bookId;
+  const AddRatingsEvent({required this.ratings ,required this.bookId});
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [ratings , bookId];
+  
+}

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:elt_global_machine_task/data/respository/auth_repo_implement.dart';
@@ -13,6 +14,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc(this.authenticanRepository) : super(AuthInitial()) {
      
      on<RegisterEvent>(registerUser);
+     on<LoginEvent>(logInUser);
+
   }
 
   FutureOr<void> registerUser(RegisterEvent event, Emitter<AuthState> emit) async{
@@ -24,7 +27,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthErrorState());
      }
     }catch(error){
-
+      log(error.toString());
     }
+  }
+
+
+
+  FutureOr<void> logInUser(LoginEvent event, Emitter<AuthState> emit) async{
+
   }
 }

@@ -5,4 +5,6 @@ abstract class BookRepository{
   Future<List<BookModel?>> fetchBooks(int page);
 
   Future<BookModel> fetchBookDetails(String id);
+
+  Future<void> addRating(double rating , String bookId);
 }

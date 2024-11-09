@@ -1,14 +1,24 @@
+import 'package:elt_global_machine_task/data/model/book_model.dart';
+import 'package:elt_global_machine_task/presentation/book_detail_screen/widgets/book_description_widget.dart';
+import 'package:elt_global_machine_task/presentation/book_detail_screen/widgets/add_rating_button.dart';
+import 'package:elt_global_machine_task/presentation/book_detail_screen/widgets/book_image_widget.dart';
+import 'package:elt_global_machine_task/presentation/book_detail_screen/widgets/bookname_rating_widget.dart';
+import 'package:elt_global_machine_task/presentation/book_detail_screen/widgets/ratings_bottomsheet.dart';
 import 'package:elt_global_machine_task/presentation/statemanagment/book_bloc/book_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class BookDetailScreen extends StatelessWidget {
   const BookDetailScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var bookId;
+    var rating;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.surface,
@@ -29,21 +39,16 @@ class BookDetailScreen extends StatelessWidget {
               style:
                   GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w700),
             ),
-            Container(
-              width: 100,
-              height: 30,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Theme.of(context).colorScheme.primary),
-              child: Center(
-                child: Text(
-                  'Add Rating',
-                  style: GoogleFonts.inter(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white),
-                ),
-              ),
+            GestureDetector(
+              onTap: () {
+                showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return RatingBottomSheet(
+                          rating, context, bookId); //extracted as method
+                    });
+              },
+              child: AddRatingButton(), //button for showing bottom sheet
             )
           ],
         ),
@@ -54,114 +59,89 @@ class BookDetailScreen extends StatelessWidget {
         listener: (context, state) {
           // TODO: implement listener
         },
-
         builder: (context, state) {
-          if(state is FetchBookDetailIntial){
-            return const Center(child: CircularProgressIndicator(),);
-          }else if(state is  FetchBookDetailEmpty){
-            return const Center(child: Text("Can't able to load"),);
-          }else if(state is FetchBookDetailSuccess){
+          if (state is FetchBookDetailIntial) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is FetchBookDetailEmpty) {
+            return const Center(
+              child: Text("Can't able to load"),
+            );
+          } else if (state is FetchBookDetailSuccess) {
             final book = state.book;
+            bookId = book.id;
+            DateTime parsedDate = DateTime.parse(book.publishedDate); 
+            String formatteDate = DateFormat('MMMM dd, yyyy').format(parsedDate); //convert date in seo 
             return Column(
-            children: [
-              Container(
-                height: 300,
-                width: double.infinity,
-                color: const Color.fromARGB(255, 251, 225, 225),
-                child: Center(
-                  child: SizedBox(
-                    height: 260,
-                    width: 170,
-                    child: Image.network(
-                      book.coverPictureURL,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 15, vertical: 15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width*70/100,
-                                child: Text(
-                                  book.title,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: GoogleFonts.inter(
-                                      fontWeight: FontWeight.w600, fontSize: 18),
-                                ),
-                              ),
-                              Container(
-                                height: 30,
-                                width: 55,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(7),
-                                    border: Border.all(
-                                        width: 1.5,
-                                        color: const Color.fromARGB(
-                                            255, 240, 240, 240))),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    const Icon(
-                                      Icons.star,
-                                      color: Color(0xFFFFC700),
-                                      size: 18,
-                                    ),
-                                  
-                                    Text(
-                                      '4.5',
-                                      style: GoogleFonts.inter(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w500,
-                                          color: const Color(0xFF5C5C5C)),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        book.authorName!.isNotEmpty ?
-                        Text("by ${book.authorName} ",
-                        style: GoogleFonts.inter(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 15
-                        ),
-                        ) : SizedBox(),
+              children: [
 
-                         Text( "${book.authorName}",
-                        style: GoogleFonts.inter(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 15
-                        ),
-                         )
-                      ],
-                    ),
-                  ),
-                ),
-              )
-            ],
-          );
-          }else{
-            return const Center(child: Text("Can't able to load"),); 
+                BookImageWidget(
+                    book: book), //widget that shows the image of the book
+
+
+                BookDetailWidget(
+                    book: book,
+                    formatteDate:
+                        formatteDate) //widget that shows the detail of the book (name, ratings, description etc..)
+              ],
+            );
+          } else {
+            return const Center(
+              child: Text("Can't able to load"),
+            );
           }
-          
         },
       )),
+    );
+  }
+}
+
+class BookDetailWidget extends StatelessWidget {
+  const BookDetailWidget({
+    super.key,
+    required this.book,
+    required this.formatteDate,
+  });
+
+  final BookModel book;
+  final String formatteDate;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: SizedBox(
+        width: double.infinity,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              bookNameAndRatingsWidget(context,
+                  book), //widgets that shows book name and ratings extracted as method
+
+              book.authorName!.isNotEmpty
+                  ? Text(
+                      "by ${book.authorName} ",
+                      style: GoogleFonts.inter(
+                          fontWeight: FontWeight.w400, fontSize: 15),
+                    )
+                  : const SizedBox(),
+              const SizedBox(height: 5),
+              Text(
+                "Published date: $formatteDate",
+                style: GoogleFonts.inter(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 13,
+                    color: const Color(0xFF5C5C5C)),
+              ),
+              const SizedBox(height: 5),
+              bookDescriptionWidget(
+                  book) // book description widget extracted as method
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

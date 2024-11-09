@@ -15,7 +15,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    BlocProvider.of<UserBloc>(context).add(CheckUserAuthenticationStatus());
+    BlocProvider.of<UserBloc>(context).add(CheckUserAuthenticationStatus()); //triggering event to get the user logged status
     super.initState();
   }
 

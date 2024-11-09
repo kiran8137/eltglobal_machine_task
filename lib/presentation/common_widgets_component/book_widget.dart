@@ -52,7 +52,15 @@ class BookWidget extends StatelessWidget {
                   Row(
                     children: [
                       const Icon(Icons.star , color: Color(0xFFFFC700),size: 15,),
-                      Text("4.5",
+                      book.ratings.isEmpty ? 
+                       Text("0.0",
+                      style: GoogleFonts.inter(
+                        fontSize: 12,
+                        fontWeight:FontWeight.w500,
+                        color: const Color(0xFF5C5C5C)
+                      ),
+                      ):
+                      Text("${book.ratings[0]['rating']}",
                       style: GoogleFonts.inter(
                         fontSize: 12,
                         fontWeight:FontWeight.w500,

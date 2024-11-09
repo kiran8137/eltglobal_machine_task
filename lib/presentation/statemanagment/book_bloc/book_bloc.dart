@@ -17,6 +17,7 @@ class BookBloc extends Bloc<BookEvent, BookState> {
 
     on<FetchBooksEvent>(fetchBooks);
     on<FetchBookDetailEvent>(fetchBookDetails);
+    on<AddRatingsEvent>(addRatings);
   }
 
   FutureOr<void> fetchBooks(FetchBooksEvent event, Emitter<BookState> emit) async{
@@ -41,6 +42,18 @@ class BookBloc extends Bloc<BookEvent, BookState> {
       emit(FetchBookDetailSuccess(book: result));
     }catch(error){
       emit(FetchBookDetailEmpty());
+      log(error.toString());
+    }
+  }
+
+  FutureOr<void> addRatings(AddRatingsEvent event, Emitter<BookState> emit) async {
+
+    try{
+      await bookRepository.addRating(event.ratings, event.bookId).then((_){
+        emit(AddRatingsSuccess());
+      });
+    }catch(error){
+      emit(AddRatingsError());
       log(error.toString());
     }
   }

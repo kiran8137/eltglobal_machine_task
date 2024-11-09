@@ -11,6 +11,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthenticationRepoImplement extends AuthenticationRepository{
   
+
+  //function used to register a user
   @override
   Future<bool> registerUser({required String userName, required password}) async {
      try{
@@ -33,11 +35,15 @@ class AuthenticationRepoImplement extends AuthenticationRepository{
 
 
        if(response.statusCode == 201){
+        //saves the access token to flutter secure storage
         await TokenServies().saveAccessToken(data["result"]["access_token"]).then((_)async{
+
+           // stored to shared preference to set login status
            final sharedpref = await SharedPreferences.getInstance();
         sharedpref.setBool('userLogInStatus', true);
          
         });
+        
        return true;
        }
        else if (response.statusCode == 400){

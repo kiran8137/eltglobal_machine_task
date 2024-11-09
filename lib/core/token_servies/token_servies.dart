@@ -11,8 +11,15 @@ Future<void> saveAccessToken(String accessToken)async{
 
 Future<String?> getAccessToken(String key)async{
  var accessToken =  await secureStorage.read(key: key);
+  
  return accessToken;
 
 }
+
+Future<void> deleteAccessToken()async{
+  await secureStorage.delete(key: 'accesstoken');
+}
+
+
   
 }
